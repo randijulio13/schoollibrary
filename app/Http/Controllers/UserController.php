@@ -17,8 +17,12 @@ class UserController extends Controller
                 ->setRowId(function ($data) {
                     return $data->id;
                 })
-                ->addColumn('action',function($data){
-                    return '<div class="btn-group"><a class="btn btn-primary btn-sm btn-edit">Edit</a><a class="btn btn-danger btn-sm btn-delete">Delete</a></div>';
+                ->addColumn('action', function ($data) {
+                    $disabled = '';
+                    if (auth()->user()->id == $data->id) {
+                        $disabled = 'disabled';
+                    }
+                    return '<div class="btn-group"><a class="btn btn-primary btn-sm btn-edit '.$disabled.'">Edit</a><a class="btn btn-danger btn-sm btn-delete '.$disabled.'">Delete</a></div>';
                 })
                 ->rawColumns(['action'])
                 ->toJson();
@@ -103,5 +107,4 @@ class UserController extends Controller
         }
         return response()->json($res, $res['status']);
     }
-
 }
