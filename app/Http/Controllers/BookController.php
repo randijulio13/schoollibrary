@@ -124,9 +124,11 @@ class BookController extends Controller
     {
         try {
             $book = Book::find($id);
+            if (file_exists('img/cover/' . $book->cover))
+                unlink('img/cover/' . $book->cover);
             $book->delete();
             $res = [
-                'status'    => 201,
+                'status'    => 200,
                 'message'   => 'Data deleted successfully'
             ];
         } catch (Exception $e) {

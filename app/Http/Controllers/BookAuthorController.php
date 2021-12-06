@@ -88,7 +88,7 @@ class BookAuthorController extends Controller
             $author = BookAuthor::find($id);
             $author->delete();
             $res = [
-                'status'    => 201,
+                'status'    => 200,
                 'message'   => 'Data deleted successfully'
             ];
         } catch (Exception $e) {
